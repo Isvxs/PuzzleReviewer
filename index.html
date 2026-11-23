@@ -179,13 +179,10 @@ function open(id,ev){
   <div class="vf">Viewer by: ${esc(r.reviewer||"Anonymous")}, date: ${esc(fmt(r.date))}</div>`;
   const m=$("#modal");m.style.setProperty("--cx",(ev?ev.clientX:innerWidth/2)+"px");m.style.setProperty("--cy",(ev?ev.clientY:innerHeight/2)+"px");
   m.scrollTop=0;m.classList.add("open");$("#cl").onclick=close;document.body.style.overflow="hidden";
-  document.documentElement.requestFullscreen?.().catch(()=>{});
 }
 function close(){
   $("#modal").classList.remove("open");document.body.style.overflow="";
-  if(document.fullscreenElement)document.exitFullscreen().catch(()=>{});
 }
-document.addEventListener("fullscreenchange",()=>{if(!document.fullscreenElement)close()});
 document.addEventListener("click",e=>{
   const c=e.target.closest("[data-id]");if(c)return open(c.dataset.id,e);
   const t=e.target.closest("[data-t]");if(t){tag=t.dataset.t;return render()}
